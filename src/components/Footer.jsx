@@ -45,7 +45,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://insragram.com" className="hover:underline">
+                  <a href="https://instagram.com" className="hover:underline">
                     Instagram
                   </a>
                 </li>
