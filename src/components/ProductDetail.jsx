@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import { newArrivals } from "./ProductSection";
@@ -5,6 +6,10 @@ import { newArrivals } from "./ProductSection";
 const ProductDetail = () => {
   const { id } = useParams();
   const product = newArrivals.find((p) => p.id === parseInt(id));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto p-8">
