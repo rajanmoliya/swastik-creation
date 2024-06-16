@@ -1,5 +1,6 @@
 import { useState } from "react";
 import swastikLogo from "../assets/swastik.svg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,12 +12,17 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-gray-200 border-b">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={swastikLogo} className="h-8" alt="Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900">
-            Swastik
-          </span>
-        </a>
+        <Link to="/" className="flex items-center">
+          <a
+            href="#"
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+          >
+            <img src={swastikLogo} className="h-8" alt="Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900">
+              Swastik
+            </span>
+          </a>
+        </Link>
         <button
           className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
           onClick={toggleMenu}

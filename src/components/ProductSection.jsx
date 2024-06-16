@@ -43,13 +43,13 @@ const bestSelling = [
     id: 1,
     name: "Best Saree 1",
     price: "₹750",
-    images: ["https://via.placeholder.com/400x400"],
+    images: [saree2],
   },
   {
     id: 2,
     name: "Best Saree 2",
     price: "₹1000",
-    images: ["https://via.placeholder.com/400x400"],
+    images: [saree1],
   },
 ];
 
@@ -63,7 +63,7 @@ const ProductCarousel = ({ products }) => (
               <img
                 src={image}
                 alt={product.name}
-                className="h-40 w-full object-cover"
+                className="h-80 w-full object-cover"
               />
             </div>
           ))}
@@ -74,7 +74,7 @@ const ProductCarousel = ({ products }) => (
         <p className="mt-2 text-gray-600">{product.price}</p>
         <Link
           to={`/product/${product.id}`}
-          className="text-blue-500 mt-4 block"
+          className="text-blue-500 mt-4 block border-b border-blue-500 pb-1 w-max"
         >
           View Details
         </Link>
