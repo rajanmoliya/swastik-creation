@@ -21,7 +21,7 @@ const HeroSection = () => {
             <img src="https://via.placeholder.com/800x400" alt="Slide 3" />
           </div> */}
         </Carousel>
-        <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 p-8 ">
+        <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-8 ">
           Welcome to Swastik Creations
         </h1>
         <p className="mt-4 text-gray-600">
