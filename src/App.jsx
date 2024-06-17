@@ -18,12 +18,11 @@ const App = () => {
             <div>
               <HeroSection />
               <ProductSection />
-              <div className="min-h-screen bg-gray-200 flex items-center justify-center p-10">
-                <LocationMap />
-              </div>
+              <LocationMap />
             </div>
           }
         />
+        <Route path="/contact" element={<LocationMap />} />
         <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
 

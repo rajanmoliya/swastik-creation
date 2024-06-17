@@ -1,13 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import swastikLogo from "../assets/swastik.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="bg-white border-gray-200 border-b">
@@ -45,20 +63,23 @@ const Navbar = () => {
           </svg>
         </button>
         <div
+          ref={menuRef}
           className={`w-full md:block md:w-auto ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-            <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
-              >
-                Home
-              </a>
+            <li onClick={closeMenu}>
+              <Link to="/">
+                <a
+                  href="#"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                >
+                  Home
+                </a>
+              </Link>
             </li>
-            <li>
+            <li onClick={closeMenu}>
               <a
                 href="#"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
@@ -66,7 +87,7 @@ const Navbar = () => {
                 Services
               </a>
             </li>
-            <li>
+            <li onClick={closeMenu}>
               <a
                 href="#"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
@@ -74,13 +95,13 @@ const Navbar = () => {
                 Pricing
               </a>
             </li>
-            <li>
-              <a
-                href="#"
+            <li onClick={closeMenu}>
+              <Link
+                to="/contact"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
