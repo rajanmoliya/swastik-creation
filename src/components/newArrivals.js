@@ -1,5 +1,6 @@
 import saree1 from "../assets/saree1.jpeg";
 import saree2 from "../assets/saree2.jpeg";
+import saree3 from "../assets/saree3.jpeg";
 
 export const newArrivals = [
   {
@@ -8,7 +9,12 @@ export const newArrivals = [
     price: "₹750",
     description:
       "DLIGHT GREEN AND GOLD CHECKS TISSUE KOTA SAREE WITH BANARASI FANCY",
-    images: [saree1],
+    images: [saree1, saree3],
+    fabric: "Tissue Kota",
+    color: "Gold Checks",
+    weave: "Banarasi",
+    border: "Fancy",
+    blouse: "Included",
   },
   {
     id: 2,

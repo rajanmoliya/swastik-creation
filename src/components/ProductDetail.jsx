@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import { newArrivals } from "./newArrivals";
@@ -7,10 +7,23 @@ const ProductDetail = () => {
   const { id } = useParams();
   const product = newArrivals.find((p) => p.id === parseInt(id));
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage("");
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="max-w-screen-xl mx-auto p-8 lg:flex">
@@ -19,17 +32,17 @@ const ProductDetail = () => {
           <div className="lg:w-1/2">
             <Carousel showThumbs={false}>
               {product.images.map((image, index) => (
-                <div key={index}>
+                <div key={index} onClick={() => openModal(image)}>
                   <img
                     src={image}
                     alt={product.name}
-                    className="h-96 w-full object-cover"
+                    className="h-96 w-full object-cover cursor-pointer"
                   />
                 </div>
               ))}
             </Carousel>
           </div>
-          <div className="lg:w-1/2 lg:pl-8">
+          <div className="lg:w-1/2 lg:pl-8 mt-4 lg:mt-0">
             <h1 className="text-4xl font-bold text-gray-900 mb-8">
               {product.name}
             </h1>
@@ -43,25 +56,43 @@ const ProductDetail = () => {
                 More Information
               </h2>
               <p className="mt-4 text-gray-600">
-                Fabric: {product.fabric || "Not available"}
+                <span className="font-bold">Fabric:</span> Tissue Kota
               </p>
               <p className="mt-2 text-gray-600">
-                Color: {product.color || "Not available"}
+                <span className="font-bold">Color:</span> Gold Checks
               </p>
               <p className="mt-2 text-gray-600">
-                Weave: {product.weave || "Not available"}
+                <span className="font-bold">Weave:</span> Banarasi
               </p>
               <p className="mt-2 text-gray-600">
-                Border: {product.border || "Not available"}
+                <span className="font-bold">Border:</span> Fancy
               </p>
               <p className="mt-2 text-gray-600">
-                Blouse: {product.blouse || "Not available"}
+                <span className="font-bold">Blouse:</span> Included
               </p>
             </div>
           </div>
         </>
       ) : (
         <p>Product not found</p>
+      )}
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative">
+            <img
+              src={selectedImage}
+              alt="Selected"
+              className="max-h-screen max-w-full object-contain"
+            />
+            <button
+              onClick={closeModal}
+              className="absolute top-0 right-0 m-4 text-white text-3xl font-bold"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
