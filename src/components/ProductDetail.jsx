@@ -56,19 +56,24 @@ const ProductDetail = () => {
                 More Information
               </h2>
               <p className="mt-4 text-gray-600">
-                <span className="font-bold">Fabric:</span> Tissue Kota
+                <span className="font-bold">Fabric:</span>{" "}
+                {product.fabric || "Not available"}
               </p>
               <p className="mt-2 text-gray-600">
-                <span className="font-bold">Color:</span> Gold Checks
+                <span className="font-bold">Color:</span>{" "}
+                {product.color || "Not available"}
               </p>
               <p className="mt-2 text-gray-600">
-                <span className="font-bold">Weave:</span> Banarasi
+                <span className="font-bold">Weave:</span>{" "}
+                {product.weave || "Not available"}
               </p>
               <p className="mt-2 text-gray-600">
-                <span className="font-bold">Border:</span> Fancy
+                <span className="font-bold">Border:</span>{" "}
+                {product.border || "Not available"}
               </p>
               <p className="mt-2 text-gray-600">
-                <span className="font-bold">Blouse:</span> Included
+                <span className="font-bold">Blouse:</span>{" "}
+                {product.blouse || "Not available"}
               </p>
             </div>
           </div>
