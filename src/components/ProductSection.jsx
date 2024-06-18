@@ -1,93 +1,65 @@
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
-import saree1 from "../assets/saree1.jpeg";
-import saree2 from "../assets/saree2.jpeg";
+import { newArrivals } from "./newArrivals";
+import { bestSelling } from "./bestSelling";
+import { useState } from "react";
 
-export const newArrivals = [
-  // Add your new arrivals here
-  {
-    id: 1,
-    name: "New Saree 1",
-    price: "₹750",
-    description:
-      "DLIGHT GREEN AND GOLD CHECKS TISSUE KOTA SAREE WITH BANARASI FANCY",
-    images: [saree1],
-  },
-  {
-    id: 2,
-    name: "New Saree 2",
-    price: "₹1000",
-    description: "DUAL SHADE AND GOLD FLORAL BUTTIS TISSUE SAREE WITH BANARASI",
-    images: [saree2],
-  },
-  {
-    id: 3,
-    name: "New Saree 3",
-    price: "₹950",
-    description:
-      "DLIGHT GREEN AND GOLD CHECKS TISSUE KOTA SAREE WITH BANARASI FANCY",
-    images: [saree1],
-  },
-  {
-    id: 4,
-    name: "New Saree 4",
-    price: "₹1499",
-    description: "DUAL SHADE AND GOLD FLORAL BUTTIS TISSUE SAREE WITH BANARASI",
-    images: [saree2],
-  },
-];
+const ProductCard = ({ product }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-const bestSelling = [
-  // Add your best selling products here
-  {
-    id: 1,
-    name: "Best Saree 1",
-    price: "₹750",
-    images: [saree2],
-  },
-  {
-    id: 2,
-    name: "Best Saree 2",
-    price: "₹1000",
-    images: [saree1],
-  },
-];
-
-const ProductCarousel = ({ products }) => (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
-    {products.map((product) => (
-      <div key={product.id} className="border border-gray-200 rounded-lg p-4">
+  return (
+    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-md group">
+      <div
+        className="relative overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <Carousel showThumbs={false}>
           {product.images.map((image, index) => (
             <div key={index}>
               <img
                 src={image}
                 alt={product.name}
-                className="h-80 w-full object-cover"
+                className={`w-full object-cover h-80 ${
+                  isHovered ? "scale-105" : ""
+                } transition-transform duration-300`}
               />
             </div>
           ))}
         </Carousel>
-        <h3 className="mt-4 text-lg font-semibold text-gray-900">
-          {product.name}
-        </h3>
+        <div
+          className={`absolute inset-0 bg-black opacity-0 ${
+            isHovered ? "opacity-50" : ""
+          } transition-opacity duration-300`}
+        ></div>
+      </div>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
         <p className="mt-2 text-gray-600">{product.price}</p>
         <Link
           to={`/product/${product.id}`}
-          className="text-blue-500 mt-4 block border-b border-blue-500 pb-1 w-max"
+          className="block mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors hover:bg-blue-600"
         >
           View Details
         </Link>
       </div>
+    </div>
+  );
+};
+
+const ProductCarousel = ({ products }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
+    {products.map((product) => (
+      <ProductCard key={product.id} product={product} />
     ))}
   </div>
 );
 
 export const ProductSection = () => {
   return (
-    <section className="bg-white py-8">
-      <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 text-center">
+    <section className="py-8">
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
           New Arrivals
         </h2>
         <ProductCarousel products={newArrivals} />
